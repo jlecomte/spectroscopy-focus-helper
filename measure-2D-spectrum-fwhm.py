@@ -10,14 +10,29 @@ from getkey import getkey
 
 ### START PARAMETERS BLOCK ####################################################
 
-# What vertical slice of the image to extract:
+# What vertical slice of the image to extract, expressed in pixels.
+#
+#                x0                     x1
+#                |                      |
+#   ----------------------------------------------------
+#   /////////////|                      |///////////////
+#   /////////////|                      |///////////////
+#   /////////////|                      |///////////////
+#
+# Pick values that are near the center of your sensor, where aberrations are
+# going to be minimal. Also pick a range that is not too wide in case your 2D
+# spectrum is ever so slightly slanted. For my ASI533MM Pro, a range of 100 px
+# centered on the sensor works well, hence these default values:
 x0, x1 = 1500, 1550
 
-# What part of the image around the spectrum to ignore when calculating the mean background value.
-# If bin_size is 20, we'll ignore +20px/-20px around the spectrum, so a total window of 40px
+# What part of the image around the 2D spectrum should we ignore when computing
+# the mean background value? Which part of the image around the 2D spectrum
+# should we use to fit a Gaussian curve? This is parameterized by bin_size,
+# which is expressed in pixels. If bin_size is 20, the signal part of the image
+# will be +20px / -20px around the spectrum, for a total window height of 40px.
 bin_size = 20
 
-# Image scale in arcsecond per pixel
+# Image scale in arcsecond per pixel, used only for display purposes.
 image_scale = 0.89
 
 ### END PARAMETERS BLOCK ######################################################
@@ -27,10 +42,11 @@ dir = sys.argv[1] if len(sys.argv) > 1 else '.'
 if not path.isdir(dir):
   sys.exit(f"{dir} does not seem to be a valid directory.")
 
-def measure_fwhm(event):
+def measure_new_image(event):
   # Load the image data - TODO: add try/except
   image = fits.open(event.src_path)
   imageData = image[0].data
+  imageHeader = image[0].header
 
   # Extract a vertical slice of the image:
   sliceData = imageData[:, x0:x1]
@@ -73,22 +89,33 @@ def measure_fwhm(event):
   coeff, var_matrix = curve_fit(gauss, xdata, values, p0=p0)
   A, mu, sigma = coeff
 
+  # Compute a normalized value of the maximum to get a better idea of the
+  # amount of signal. Indeed, due to aberrations, e.g., astigmatism, a lower
+  # FWHM image is not completely guaranteed to have the highest SNR, so we
+  # will display both to the user.
+  normalizedMaxValue = 0.
+  if "EXPTIME" in imageHeader:
+    exptime = imageHeader["EXPTIME"]
+    if exptime > 0:
+      normalizedMaxValue = A/exptime
+
   # fitted_gaussian_curve = gauss(xdata, *coeff)
   # plt.subplot(3, 1, 3)
   # plt.plot(xdata, fitted_gaussian_curve, label='Fitted curve')
 
   # plt.show()
 
-  print(f"FWHM = {sigma * 2:.2f}px -> {sigma * 2 * image_scale:.2f}\"")
+  filename = path.basename(event.src_path)
+  print(f"{filename}: FWHM = {sigma * 2:.2f}px -> {sigma * 2 * image_scale:.2f}\" | NMAX = {normalizedMaxValue:.2f}")
 
 event_handler = PatternMatchingEventHandler(patterns=["*.fit", "*.fits"], ignore_directories=True)
-event_handler.on_created = measure_fwhm
+event_handler.on_created = measure_new_image
 
 observer = Observer()
 observer.schedule(event_handler, dir, recursive=False)
 observer.start()
 
-print(f"Watching directory {dir}.\nPress 'q' to exit.")
+print(f"Watching directory {dir}\nPress 'q' to exit")
 
 key = getkey()
 if key == 'q':
