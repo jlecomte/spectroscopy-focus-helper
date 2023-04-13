@@ -4,9 +4,7 @@ In spectroscopy, when acquiring the spectrum of a star, we obtain an image calle
 
 ![example of a 2D spectrum](2D-spectrum-example.jpg)
 
-One of the biggest challenges in spectroscopy is to properly focus the telescope in order to obtain the finest 2D spectrum that the instrument and the seeing conditions can provide. A sharper 2D spectrum will yield in a higher signal-to-noise ratio in the final spectral profile, so it is important to get this right!
-
-In this repository, I present a very simple Python script that can help you achieve better focus in spectroscopy.
+One of the biggest challenges in spectroscopy is to properly focus the telescope in order to obtain the highest amount of useful signal going through the slit that the instrument and the current seeing conditions can provide. In this repository, I present a very simple Python script that can help you achieve better focus in spectroscopy.
 
 ## Installation
 
@@ -50,20 +48,20 @@ Watching directory C:\Users\Julien\Documents\N.I.N.A\Images\2023-04-12
 Press 'q' to exit
 ```
 
-Then, in your image acquisition software, capture a first image of the 2D spectrum. As soon as the image has been saved to the directory watched by this script as a FITS file (with either the `.fit` or `.fits` extension), the script will read the new file, attempt to measure the FWHM of the 2D spectrum it contains, and print the result to the console. It will also print a normalized maximum value (NMAX) as a way to gauge the amount of signal going through the slit. Indeed, in some spectrograph designs, astigmatism is always present (the UVEX for example) so the narrowest spectrum does not always equal the best SNR. The target should be to get as much of the light through the slit as possible, so it is important to use these two numbers together to decide when you have reached best focus.
+Then, in your image acquisition software, capture a first image of the 2D spectrum. As soon as the image has been saved to the directory watched by this script as a FITS file (with either the `.fit` or `.fits` extension), the script will read the new file, and attempt to measure 2D spectrum it contains. It will print the FWHM of the 2D spectrum as well as a normalized value of the overall signal (NSIG) contained in the 2D spectrum. Indeed, in some spectrograph designs, astigmatism is always present (case of the UVEX for example) so the narrowest spectrum does not always equal the best SNR. The target should be to get as much of the light going through the slit as possible, so it is important to use these two numbers together to decide when you have reached best focus.
 
-Now, iteratively change the focus position in small steps, and capture a new image after each change in the focus position. Keep an eye on the console to see the evolution of the FWHM and the NMAX values. The goal is to find the focus point that maximizes the NMAX / minimizes the FWHM. Here is an example of a basic execution:
+Now, iteratively change the focus position in small steps, and capture a new image after each change in the focus position. Keep an eye on the console to see the evolution of the FWHM and the NSIG values. The goal is to find the focus point that maximizes the NSIG / minimizes the FWHM. Here is an example of a basic execution:
 
 ```
 (env) C:\Users\Julien\Astronomy> python spectroscopy-focus-helper.py C:\Users\Julien\Documents\N.I.N.A\Images\2023-4-12
 Watching directory C:\Users\Julien\Documents\N.I.N.A\Images\2023-4-12
 Press 'q' to exit
-HD097633_00001.fits: FWHM = 4.43px -> 3.94" | NMAX = 59.17
-HD097633_00002.fits: FWHM = 4.02px -> 3.58" | NMAX = 62.87
-HD097633_00003.fits: FWHM = 3.55px -> 3.16" | NMAX = 64.28
-HD097633_00004.fits: FWHM = 3.75px -> 3.34" | NMAX = 63.32
-HD097633_00005.fits: FWHM = 4.47px -> 3.98" | NMAX = 59.05
-HD097633_00006.fits: FWHM = 5.66px -> 5.04" | NMAX = 55.41
+HD097633_00001.fits: FWHM = 4.43px -> 3.94" | NSIG = 411.45
+HD097633_00002.fits: FWHM = 4.02px -> 3.58" | NSIG = ...
+HD097633_00003.fits: FWHM = 3.55px -> 3.16" | NSIG = ...
+HD097633_00004.fits: FWHM = 3.75px -> 3.34" | NSIG = ...
+HD097633_00005.fits: FWHM = 4.47px -> 3.98" | NSIG = ...
+HD097633_00006.fits: FWHM = 5.66px -> 5.04" | NSIG = ...
 ```
 
 Remember which focus value you had when capturing each image. In the execution above, `HD097633_00003.fits` was clearly the sharpest / brightest spectrum. Once you think you have reached that point, you are done, and you can simply press `q` to exit the program.

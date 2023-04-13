@@ -23,14 +23,14 @@ from getkey import getkey
 # going to be minimal. Also pick a range that is not too wide in case your 2D
 # spectrum is ever so slightly slanted. For my ASI533MM Pro, a range of 100 px
 # centered on the sensor works well, hence these default values:
-x0, x1 = 1500, 1550
+x0, x1 = 1500, 1600
 
 # What part of the image around the 2D spectrum should we ignore when computing
 # the mean background value? Which part of the image around the 2D spectrum
 # should we use to fit a Gaussian curve? This is parameterized by bin_size,
 # which is expressed in pixels. If bin_size is 20, the signal part of the image
 # will be +20px / -20px around the spectrum, for a total window height of 40px.
-bin_size = 20
+bin_size = 30
 
 # Image scale in arcsecond per pixel, used only for display purposes.
 image_scale = 0.89
@@ -63,7 +63,7 @@ def measure_new_image(event):
   maxIndex = np.argmax(values)
 
   # Get background value
-  background = np.concatenate((values[:maxIndex-bin_size], values[maxIndex+bin_size:]))
+  background = np.concatenate((values[ : maxIndex-bin_size], values[maxIndex + bin_size : ]))
   backgroundValue = np.mean(background, axis=0)
   # print(f"Background value is {backgroundValue}")
 
@@ -73,6 +73,9 @@ def measure_new_image(event):
   # Get the maximum value:
   maxValue = values[maxIndex]
 
+  # Extract the useful part of the image, the one that contains only the 2D spectrum
+  spectrum = values[maxIndex - bin_size : maxIndex + bin_size]
+
   # Define model function to be used to fit to the data above:
   def gauss(x, *p):
     A, mu, sigma = p
@@ -81,7 +84,7 @@ def measure_new_image(event):
   xdata = np.arange(0, len(values))
 
   # plt.subplot(3, 1, 2)
-  # plt.scatter(xdata, values)
+  # plt.scatter(xdata, spectrum)
 
   # p0 is the initial guess for the fitting coefficients (A, mu and sigma above)
   p0 = [maxValue, maxIndex, 3]
@@ -89,15 +92,14 @@ def measure_new_image(event):
   coeff, var_matrix = curve_fit(gauss, xdata, values, p0=p0)
   A, mu, sigma = coeff
 
-  # Compute a normalized value of the maximum to get a better idea of the
-  # amount of signal. Indeed, due to aberrations, e.g., astigmatism, a lower
-  # FWHM image is not completely guaranteed to have the highest SNR, so we
-  # will display both to the user.
-  normalizedMaxValue = 0.
+  # Compute a normalized value of the overall amount of signal. Indeed, due to
+  # aberrations, e.g., astigmatism, a lower FWHM image is not guaranteed to
+  # have the highest SNR, so we will display both to the user.
+  normalizedSignalValue = 0.
   if "EXPTIME" in imageHeader:
     exptime = imageHeader["EXPTIME"]
     if exptime > 0:
-      normalizedMaxValue = A/exptime
+      normalizedSignalValue = np.sum(spectrum)/exptime
 
   # fitted_gaussian_curve = gauss(xdata, *coeff)
   # plt.subplot(3, 1, 3)
@@ -106,7 +108,7 @@ def measure_new_image(event):
   # plt.show()
 
   filename = path.basename(event.src_path)
-  print(f"{filename}: FWHM = {sigma * 2:.2f}px -> {sigma * 2 * image_scale:.2f}\" | NMAX = {normalizedMaxValue:.2f}")
+  print(f"{filename}: FWHM = {sigma * 2:.2f}px -> {sigma * 2 * image_scale:.2f}\" | NSIG = {normalizedSignalValue:.2f}")
 
 event_handler = PatternMatchingEventHandler(patterns=["*.fit", "*.fits"], ignore_directories=True)
 event_handler.on_created = measure_new_image
