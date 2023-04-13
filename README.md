@@ -50,21 +50,27 @@ Press 'q' to exit
 
 Then, in your image acquisition software, capture a first image of the 2D spectrum. As soon as the image has been saved to the directory watched by this script as a FITS file (with either the `.fit` or `.fits` extension), the script will read the new file, and attempt to measure the 2D spectrum it contains. It will print the FWHM of the 2D spectrum as well as a normalized value of the overall signal (NSIG) contained in the 2D spectrum. Indeed, in some spectrograph designs, astigmatism is always present (case of the UVEX for example) so the narrowest spectrum does not always equal the best SNR. The target should be to get as much of the light going through the slit as possible, so it is important to use these two numbers together to decide when you have reached best focus.
 
-Now, iteratively change the focus position in small steps, and capture a new image after each change in the focus position. Keep an eye on the console to see the evolution of the FWHM and the NSIG values. The goal is to find the focus point that maximizes the NSIG / minimizes the FWHM. Here is an example of a basic execution:
+Now, iteratively change the focus position in small steps, and capture a new image after each change in the focus position. Keep an eye on the console to see the evolution of the FWHM and the NSIG values. The goal is to find the focus point that maximizes the NSIG / minimizes the FWHM.
+
+**Note:** If your image acquisition software supports it, it is helpful to have the focuser position as part of the file name. In [N.I.N.A.](https://nighttime-imaging.eu/), you can use `$$FOCUSERPOSITION$$`.
+
+Here is an example of a basic execution:
 
 ```
-(env) C:\Users\Julien\Astronomy> python spectroscopy-focus-helper.py C:\Users\Julien\Documents\N.I.N.A\Images\2023-4-12
-Watching directory C:\Users\Julien\Documents\N.I.N.A\Images\2023-4-12
+(env) C:\Users\Julien\Astronomy> python spectroscopy-focus-helper.py C:\Users\Julien\Documents\N.I.N.A.\Images\2023-4-12
+Watching directory C:\Users\Julien\Documents\N.I.N.A.\Images\2023-4-12
 Press 'q' to exit
-HD097633_00001.fits: FWHM = 4.43px -> 3.94" | NSIG = 411.45
-HD097633_00002.fits: FWHM = 4.02px -> 3.58" | NSIG = ...
-HD097633_00003.fits: FWHM = 3.55px -> 3.16" | NSIG = ...
-HD097633_00004.fits: FWHM = 3.75px -> 3.34" | NSIG = ...
-HD097633_00005.fits: FWHM = 4.47px -> 3.98" | NSIG = ...
-HD097633_00006.fits: FWHM = 5.66px -> 5.04" | NSIG = ...
+HD097633_9350.fits: FWHM = 4.43px -> 3.94" | NSIG = 411.45
+HD097633_9340.fits: FWHM = 4.02px -> 3.58" | NSIG = ...
+HD097633_9330.fits: FWHM = 3.55px -> 3.16" | NSIG = ...
+HD097633_9320.fits: FWHM = 3.75px -> 3.34" | NSIG = ...
+HD097633_9310.fits: FWHM = 4.47px -> 3.98" | NSIG = ...
+HD097633_9300.fits: FWHM = 5.66px -> 5.04" | NSIG = ...
 ```
 
-Remember which focus value you had when capturing each image. In the execution above, `HD097633_00003.fits` was clearly the sharpest / brightest spectrum. Once you think you have reached that point, you are done, and you can simply press `q` to exit the program.
+If you did not include the focuser position in the file name, you will have to remember which focus position you had when capturing each image. In the execution above, focuser position `9330` clearly gave the sharpest / brightest spectrum.
+
+Once you are done, and you can simply press `q` to exit the program.
 
 **Note:** Make sure you tweak the value of the parameters at the top of the Python script for optimal results!
 
