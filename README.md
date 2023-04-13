@@ -46,8 +46,8 @@ Start the program by specifying the directory in which your acquisition software
 
 ```
 (env) python measure-2D-spectrum-fwhm.py C:\Users\Julien\Documents\N.I.N.A\Images\2023-04-12
-Watching directory C:\Users\Julien\Documents\N.I.N.A\Images\2023-04-12.
-Press 'q' to exit.
+Watching directory C:\Users\Julien\Documents\N.I.N.A\Images\2023-04-12
+Press 'q' to exit
 ```
 
 Then, in your image acquisition software, capture a first image of the 2D spectrum. As soon as the image has been stored on disk (in the directory watched by this script) as a FITS file (with either the `.fit` or `.fits` extension), the script will read the new file, attempt to measure the FWHM of the 2D spectrum it contains, and print the result to the console. It will also print a normalized maximum value (NMAX) as a way to gauge the amount of signal going through the slit. Indeed, in some spectrograph designs, astigmatism is always present (the UVEX for example) so the narrowest spectrum does not always equal the best SNR. The target should be to get as much of the light through the slit as possible, so it is important to use these two numbers together to decide when you have reached best focus.
