@@ -1,4 +1,4 @@
-# Measure 2D Spectrum FWHM
+# Measure 2D Spectrum FWHM And Signal
 
 In spectroscopy, when acquiring the spectrum of a star, we obtain an image named a "2D spectrum" which looks like this:
 
