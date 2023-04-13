@@ -1,4 +1,4 @@
-# Measure 2D Spectrum FWHM And Signal
+# Spectroscopy Focus Helper
 
 In spectroscopy, when acquiring the spectrum of a star, we obtain an image called a "2D spectrum" which looks like this:
 
@@ -45,7 +45,7 @@ This tool relies on the following two reasonable assumptions:
 Start the program by specifying the directory in which your acquisition software will save image files. Example:
 
 ```
-(env) python measure-2D-spectrum-fwhm.py C:\Users\Julien\Documents\N.I.N.A\Images\2023-04-12
+(env) python spectroscopy-focus-helper.py C:\Users\Julien\Documents\N.I.N.A\Images\2023-04-12
 Watching directory C:\Users\Julien\Documents\N.I.N.A\Images\2023-04-12
 Press 'q' to exit
 ```
@@ -55,7 +55,7 @@ Then, in your image acquisition software, capture a first image of the 2D spectr
 Now, iteratively change the focus position in small steps, and capture a new image after each change in the focus position. Keep an eye on the console to see the evolution of the FWHM and the NMAX values. The goal is to find the focus point that maximizes the NMAX / minimizes the FWHM. Here is an example of a basic execution:
 
 ```
-(env) C:\Users\Julien\Astronomy> python measure-2D-spectrum-fwhm C:\Users\Julien\Documents\N.I.N.A\Images\2023-4-12
+(env) C:\Users\Julien\Astronomy> python spectroscopy-focus-helper.py C:\Users\Julien\Documents\N.I.N.A\Images\2023-4-12
 Watching directory C:\Users\Julien\Documents\N.I.N.A\Images\2023-4-12
 Press 'q' to exit
 HD097633_00001.fits: FWHM = 4.43px -> 3.94" | NMAX = 59.17
