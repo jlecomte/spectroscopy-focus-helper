@@ -58,6 +58,8 @@ Now, iteratively change the focus position in small steps, and capture a new ima
 
 In the example above, the focus position corresponding to a FWHM of 3.16" was the ideal focus position.
 
+**Note:** Make sure you tweak the value of the parameters at the top of the Python script for optimal results!
+
 ## FAQ
 
 You may wonder why I did not go the full nine yards by connecting to the camera and the focuser ASCOM devices directly from within the script and by implementing a real autofocus routine. I thought about doing that, for a few seconds, but the amount of work to get this concept to work well is significant, and I simply did not think that it was worth it. But if you feel courageous, by all means, take a stab at it!
