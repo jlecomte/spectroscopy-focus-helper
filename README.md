@@ -60,15 +60,15 @@ Here is an example of a basic execution:
 (env) C:\Users\Julien\Astronomy> python spectroscopy-focus-helper.py C:\Users\Julien\Documents\N.I.N.A.\Images\2023-4-13
 Watching directory C:\Users\Julien\Documents\N.I.N.A.\Images\2023-4-13
 Press 'q' to exit
-HD097633-9430.fits: FWHM = 8.06px -> 3.94" | NSIG = 399.14
-HD097633-9415.fits: FWHM = 8.37px -> 3.58" | NSIG = 437.16
-HD097633-9400.fits: FWHM = 6.34px -> 3.16" | NSIG = 527.33
-HD097633-9385.fits: FWHM = 5.48px -> 3.34" | NSIG = 513.05
-HD097633-9370.fits: FWHM = 4.49px -> 3.98" | NSIG = 507.35
-HD097633-9355.fits: FWHM = 3.57px -> 5.04" | NSIG = 480.99
-HD097633-9340.fits: FWHM = 3.57px -> 5.04" | NSIG = 445.71
-HD097633-9325.fits: FWHM = 4.60px -> 5.04" | NSIG = 417.71
-HD097633-9310.fits: FWHM = 5.83px -> 5.04" | NSIG = 356.66
+HD097633-9430.fits: FWHM = 8.06px -> 7.17" | NSIG = 399.14
+HD097633-9415.fits: FWHM = 8.37px -> 7.45" | NSIG = 437.16
+HD097633-9400.fits: FWHM = 6.34px -> 5.64" | NSIG = 527.33
+HD097633-9385.fits: FWHM = 5.48px -> 4.88" | NSIG = 513.05
+HD097633-9370.fits: FWHM = 4.49px -> 4.00" | NSIG = 507.35
+HD097633-9355.fits: FWHM = 3.57px -> 3.18" | NSIG = 480.99
+HD097633-9340.fits: FWHM = 3.57px -> 3.18" | NSIG = 445.71
+HD097633-9325.fits: FWHM = 4.60px -> 4.09" | NSIG = 417.71
+HD097633-9310.fits: FWHM = 5.83px -> 5.19" | NSIG = 356.66
 ```
 
 If you did not include the focuser position in the file name, you will have to remember which focus position you had when capturing each image. In the execution above, focuser position `9330` clearly gave the sharpest / brightest spectrum.
