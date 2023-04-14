@@ -2,7 +2,7 @@
 
 In spectroscopy, when acquiring the spectrum of a star, we obtain an image called a "2D spectrum" which looks like this:
 
-![example of a 2D spectrum](2D-spectrum-example.jpg)
+![example of a 2D spectrum](images/2D-spectrum-example.jpg)
 
 One of the biggest challenges in spectroscopy is to properly focus the telescope in order to obtain the highest amount of useful signal going through the slit that the instrument and the current seeing conditions can provide. In this repository, I present a very simple Python script that can help you achieve better focus in spectroscopy.
 
@@ -73,6 +73,12 @@ If you did not include the focuser position in the file name, you will have to r
 Once you are done, and you can simply press `q` to exit the program.
 
 **Note:** Make sure you tweak the value of the parameters at the top of the Python script for optimal results!
+
+## Demo
+
+Check out this video recording of a sample session using this tool:
+
+[![YouTube video talking about this flat panel](images/demo-video-thumbnail.png)](https://www.youtube.com/watch?v=Fphfr63r40E)
 
 ## FAQ
 
