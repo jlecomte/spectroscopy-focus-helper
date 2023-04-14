@@ -57,15 +57,18 @@ Now, iteratively change the focus position in small steps, and capture a new ima
 Here is an example of a basic execution:
 
 ```
-(env) C:\Users\Julien\Astronomy> python spectroscopy-focus-helper.py C:\Users\Julien\Documents\N.I.N.A.\Images\2023-4-12
-Watching directory C:\Users\Julien\Documents\N.I.N.A.\Images\2023-4-12
+(env) C:\Users\Julien\Astronomy> python spectroscopy-focus-helper.py C:\Users\Julien\Documents\N.I.N.A.\Images\2023-4-13
+Watching directory C:\Users\Julien\Documents\N.I.N.A.\Images\2023-4-13
 Press 'q' to exit
-HD097633_9350.fits: FWHM = 4.43px -> 3.94" | NSIG = 411.45
-HD097633_9340.fits: FWHM = 4.02px -> 3.58" | NSIG = ...
-HD097633_9330.fits: FWHM = 3.55px -> 3.16" | NSIG = ...
-HD097633_9320.fits: FWHM = 3.75px -> 3.34" | NSIG = ...
-HD097633_9310.fits: FWHM = 4.47px -> 3.98" | NSIG = ...
-HD097633_9300.fits: FWHM = 5.66px -> 5.04" | NSIG = ...
+HD097633-9430.fits: FWHM = 8.06px -> 3.94" | NSIG = 399.14
+HD097633-9415.fits: FWHM = 8.37px -> 3.58" | NSIG = 437.16
+HD097633-9400.fits: FWHM = 6.34px -> 3.16" | NSIG = 527.33
+HD097633-9385.fits: FWHM = 5.48px -> 3.34" | NSIG = 513.05
+HD097633-9370.fits: FWHM = 4.49px -> 3.98" | NSIG = 507.35
+HD097633-9355.fits: FWHM = 3.57px -> 5.04" | NSIG = 480.99
+HD097633-9340.fits: FWHM = 3.57px -> 5.04" | NSIG = 445.71
+HD097633-9325.fits: FWHM = 4.60px -> 5.04" | NSIG = 417.71
+HD097633-9310.fits: FWHM = 5.83px -> 5.04" | NSIG = 356.66
 ```
 
 If you did not include the focuser position in the file name, you will have to remember which focus position you had when capturing each image. In the execution above, focuser position `9330` clearly gave the sharpest / brightest spectrum.
@@ -73,6 +76,8 @@ If you did not include the focuser position in the file name, you will have to r
 Once you are done, and you can simply press `q` to exit the program.
 
 **Note:** Make sure you tweak the value of the parameters at the top of the Python script for optimal results!
+
+**Note:** Sharp-eyed readers will have noticed that the spectrum with the lowest FWHM is indeed not the spectrum with the most signal...
 
 ## Demo
 
