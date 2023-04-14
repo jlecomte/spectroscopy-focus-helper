@@ -2,7 +2,7 @@
 
 In spectroscopy, when acquiring the spectrum of a star, we obtain an image called a "2D spectrum" which looks like this:
 
-![example of a 2D spectrum](images/2D-spectrum-example.jpg)
+![Example of a 2D spectrum](images/2D-spectrum-example.jpg)
 
 One of the biggest challenges in spectroscopy is to properly focus the telescope in order to obtain the highest amount of useful signal going through the slit that the instrument and the current seeing conditions can provide. In this repository, I present a very simple Python script that can help you achieve better focus in spectroscopy.
 
@@ -77,7 +77,9 @@ Once you are done, and you can simply press `q` to exit the program.
 
 **Note:** Make sure you tweak the value of the parameters at the top of the Python script for optimal results!
 
-**Note:** Sharp-eyed readers will have noticed that the spectrum with the lowest FWHM is indeed not the spectrum with the most signal...
+**Note:** Sharp-eyed readers will have noticed that the spectrum with the lowest FWHM is indeed not the spectrum with the most signal. Here is a graph of FWHM and NSIG as a function of the focuser position:
+
+![Graph of FWHM and NSIG as a function of the focuser position](images/graph-fwhm-nsig-result.png)
 
 ## Demo
 
