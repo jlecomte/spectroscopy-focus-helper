@@ -81,6 +81,14 @@ Once you are done, and you can simply press `q` to exit the program.
 
 ![Graph of FWHM and NSIG as a function of the focuser position](images/graph-fwhm-nsig-result.png)
 
+In the case of Star'Ex, this small difference (which amounts to about 0.2mm of length on the focuser draw tube) may be explained by many factors, including:
+
+* The collimating lens may not be perfectly focused. In the absence of a fine focus system, this is to be expected.
+* A chromatic effect (I use a refracting telescope) since the guide camera looks at the entirety of the visible spectrum while the imaging camera looks at H-alpha (deep red).
+* Atmospheric dispersion.
+
+In the end, a compromise can be attained, which allows for better centering/guiding without significantly impacting the total amount of signal going through the slit.
+
 ## Demo
 
 Check out this video recording of a sample session using this tool:
