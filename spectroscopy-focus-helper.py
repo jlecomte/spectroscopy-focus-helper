@@ -23,6 +23,7 @@ from getkey import getkey
 # going to be minimal. Also pick a range that is not too wide in case your 2D
 # spectrum is ever so slightly slanted. For my ASI533MM Pro, a range of 100 px
 # centered on the sensor works well, hence these default values:
+#
 x0, x1 = 1500, 1600
 
 # What part of the image around the 2D spectrum should we ignore when computing
@@ -30,6 +31,19 @@ x0, x1 = 1500, 1600
 # should we use to fit a Gaussian curve? This is parameterized by bin_size,
 # which is expressed in pixels. If bin_size is 20, the signal part of the image
 # will be +20px / -20px around the spectrum, for a total window height of 40px.
+#
+#  ////////////////////////////////////////////
+#  ///////////// background sky ///////////////
+#  -------------------------------------------- <- y0 - bin_size
+#
+#
+#  ******************************************** <- 2D spectrum (y0)
+#
+#
+#  -------------------------------------------- <- yo + bin_size
+#  ///////////// background sky ///////////////
+#  ////////////////////////////////////////////
+#
 bin_size = 30
 
 # Image scale in arcsecond per pixel, used only for display purposes.
