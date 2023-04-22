@@ -71,7 +71,7 @@ HD097633-9325.fits: FWHM = 4.60px -> 4.09" | NSIG = 417.71
 HD097633-9310.fits: FWHM = 5.83px -> 5.19" | NSIG = 356.66
 ```
 
-If you did not include the focuser position in the file name, you will have to remember which focus position you had when capturing each image. In the execution above, focuser position `9330` clearly gave the sharpest / brightest spectrum.
+If you did not include the focuser position in the file name, you will have to remember which focus position you had when capturing each image.
 
 Once you are done, and you can simply press `q` to exit the program.
 
