@@ -40,7 +40,7 @@ x0, x1 = 1500, 1600
 #  ******************************************** <- 2D spectrum (y0)
 #
 #
-#  -------------------------------------------- <- yo + bin_size
+#  -------------------------------------------- <- y0 + bin_size
 #  ///////////// background sky ///////////////
 #  ////////////////////////////////////////////
 #
@@ -118,7 +118,6 @@ def measure_new_image(event):
   # fitted_gaussian_curve = gauss(xdata, *coeff)
   # plt.subplot(3, 1, 3)
   # plt.plot(xdata, fitted_gaussian_curve, label='Fitted curve')
-
   # plt.show()
 
   filename = path.basename(event.src_path)
