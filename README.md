@@ -93,7 +93,7 @@ In the end, a compromise can be attained, which allows for better centering/guid
 
 Check out this video recording of a sample session using this tool:
 
-[![YouTube video talking about this flat panel](images/demo-video-thumbnail.png)](https://www.youtube.com/watch?v=Fphfr63r40E)
+[![YouTube video showing how to use this script](images/demo-video-thumbnail.png)](https://www.youtube.com/watch?v=Fphfr63r40E)
 
 ## FAQ
 
